@@ -19,10 +19,7 @@ public class ProduitController {
         this.produitService = produitService;
     }
 
-    @GetMapping("/hello")
-    public String sayHello(){
-        return "Hello";
-    }
+
     //recupere tout les infos qui seront dans notre base de donnees
     @GetMapping("/all")
     public List<Produit>getAllProduits(){
@@ -32,6 +29,22 @@ public class ProduitController {
     @PostMapping
     public Produit  createproduit(@RequestBody Produit produit){
         return produitService.createProduit(produit);
+
+    }
+    @GetMapping("{id}")
+    public Produit getProduitById(long id){
+        return produitService.getProduitById(id);
+    }
+    @DeleteMapping("{id}")
+    public String deleteProduitById(@PathVariable long idProduit){
+        return produitService.deleteProduitById(idProduit);
+    }
+
+    @PutMapping("{id}")
+    public Produit modifierProduitById(@PathVariable long id,@RequestBody Produit produit){
+        // on appele id du produit et les variable des produit
+        return produitService.modifierProduitById(id,produit);
+
 
     }
 }
